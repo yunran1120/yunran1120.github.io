@@ -1,21 +1,6 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
-<script>
-// 先执行我们的重写，把事件注册的口子堵上
-const originalAdd = EventTarget.prototype.addEventListener;
-EventTarget.prototype.addEventListener = function(type, listener, options) {
-    if(['blur', 'visibilitychange', 'focusout', 'mouseleave'].includes(type)) {
-        return;
-    }
-    return originalAdd.call(this, type, listener, options);
-};
-
-// 锁死状态
-document.hasFocus = () => true;
-Object.defineProperty(document, 'visibilityState', {value: 'visible', writable: false, configurable: false});
-Object.defineProperty(document, 'hidden', {value: false, writable: false, configurable: false});
-</script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>模拟页面</title>
